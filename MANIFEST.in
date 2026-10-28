@@ -1,0 +1,5 @@
+include CHANGELOG.rst
+include README.rst
+include requirements/base.in
+include requirements/constraints.txt
+recursive-include eox_paygate *.html *.png *.gif *.js *.css *.jpg *.jpeg *.svg *.py *.yml *.po *.mo
