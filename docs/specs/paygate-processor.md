@@ -17,41 +17,37 @@ The Paygate API reference is its published swagger (`/paygateWS/swagger/v3/swagg
 1. As a learner, I want to see a "Pay with Paygate" option at checkout, so that I can pay with the payment types my site offers through Paygate.
 2. As a learner, I want to be sent to Paygate's hosted payment page with my cart's amount and description already set, so that I don't have to type payment details twice.
 3. As a learner, I want the hosted payment page in my language when Paygate supports it, so that I understand what I am paying for.
-4. As a learner, I want to pay by card (VISA, MASTERCARD, AMEX), so that I am enrolled immediately.
-5. As a learner, I want to pay with PayPal, so that I can use my PayPal account.
-6. As a learner, I want to pay with MB WAY, so that I can confirm the payment on my phone.
-7. As a learner, I want to pay with a Multibanco reference (REFMB), so that I can pay later at an ATM or in home banking.
-8. As a learner, I want to pay with a DUC, so that I can use that payment document.
-9. As a learner, after paying on the hosted payment page, I want to come back to the site and see that my payment succeeded, so that I know I am enrolled.
-10. As a learner who chose a deferred payment type, I want to see that my payment is pending instead of an error, so that I know I still have to complete it.
-11. As a learner who pays a Multibanco reference or DUC days later, I want to be enrolled without doing anything else on the site, so that paying is all I need to do.
-12. As a learner who cancels on the hosted payment page, I want to come back to the site and see that the payment was cancelled, so that I can try again.
-13. As a learner whose payment is declined, I want to come back to the site and see that it failed, so that I can try another payment type.
-14. As a learner, I want never to be charged twice or enrolled twice for one cart because Paygate notified the site more than once, so that duplicate notices cause no harm.
-15. As a learner who paid but was not enrolled, I want support staff to be able to verify my payment against Paygate and settle my cart, so that my problem is solved quickly.
-16. As a site operator, I want to install `eox-paygate` next to `openedx-zeitlabs-payments` and have the processor registered automatically, so that I don't have to change zeitlabs or the platform.
-17. As a site operator, I want to configure Paygate per site in `PAYGATE_SETTINGS`, through the site configuration or Django settings, so that each site in a multi-tenant instance can use its own Paygate merchant or none.
-18. As a site operator, I want to set the Paygate API base URL myself, with no URL built into the code, so that I decide whether a site talks to Paygate's test or production environment.
-19. As a site operator, I want to configure the access token, merchant code, Basic auth user and password, and callback key, so that the processor can authenticate against Paygate and verify Paygate's server callbacks.
-20. As a site operator, I want to configure which payment types are offered, defaulting to VISA, MASTERCARD, AMEX, PAYPAL, MBWAY, REFMB and DUC, so that I only offer the types my merchant has enabled.
-21. As a site operator, I want the processor hidden at checkout on any site without a usable Paygate configuration, so that learners never see a processor that cannot work.
-22. As a site operator, I want a single server callback URL for Paygate to call, so that I can register it in my Paygate merchant set-up.
-23. As a site operator, I want server callbacks with a wrong or missing callback key rejected without effect, so that nobody can settle carts by calling the URL.
-24. As a site operator, I want every server callback verified against Paygate's API before a cart is settled, so that a forged or leaked callback cannot mark a cart as paid.
-25. As a site operator, I want the amount and currency Paygate reports compared against the cart, so that an underpaid or wrong-currency payment is never settled as paid.
-26. As a site operator, I want access tokens, passwords and the callback key kept out of logs and out of the transaction data the plugin stores, so that credentials do not leak through the database or log shipping.
-27. As a site operator, I want a management command that finds payments completed in Paygate within a time window and settles carts that were not settled, so that I can recover after an outage in which server callbacks were lost.
-28. As a site operator, I want that management command to accept a single payment reference, so that I can recover one learner's payment.
-29. As a site operator, I want the management command to skip carts that are already settled and to report what it did, so that running it twice is safe.
-30. As support staff, I want a "Check payment in Paygate" action on the cart admin of a site with Paygate configured, so that I can settle a paid cart from the admin.
-31. As support staff, I want a "Mark test payment as paid" action on the cart admin of a site with Paygate configured, so that I can simulate a completed deferred payment in Paygate's test environment and exercise the server callback.
-32. As support staff, I want a clear admin message for each selected cart: settled, still pending, not a Paygate cart, not found in Paygate, or Paygate error, so that I know what happened to each one.
-33. As support staff on a site without Paygate configuration, I want the cart admin to look exactly like the standard zeitlabs one, so that Paygate actions don't appear where they cannot work.
-34. As a developer, I want the processor to rely only on the zeitlabs processor contract `v1` and its public settlement logic, so that it keeps working as zeitlabs evolves.
-35. As a developer, I want every behaviour written test-first (TDD), so that each piece of code exists because a failing test required it.
-36. As a developer, I want 100% test coverage enforced in CI from the first commit, so that no untested code is merged.
-37. As a developer, I want GitHub Actions to run the tests on Python 3.11 with Django 4.2 and Python 3.12 with Django 5.2, so that the plugin keeps working on the Open edX releases in use.
-38. As a developer, I want the README to document installation, every setting, the server callback URL, the admin actions, the management command and a manual end-to-end test procedure against Paygate's test environment, all in English, so that operators and testers can use the plugin without reading the code.
+4. As a learner, I want the hosted payment page to offer exactly the payment types configured in `PAYGATE_SETTINGS` for my site (by default VISA, MASTERCARD, AMEX, PAYPAL, MBWAY, REFMB and DUC), because the processor sends that list as `PAYMENT_TYPES` in the `CheckOut` request.
+5. As a learner, after paying on the hosted payment page, I want to come back to the site and see that my payment succeeded, so that I know I am enrolled.
+6. As a learner who chose a deferred payment type, I want to see that my payment is pending instead of an error, so that I know I still have to complete it.
+7. As a learner who pays a Multibanco reference or DUC days later, I want to be enrolled without doing anything else on the site, so that paying is all I need to do.
+8. As a learner who cancels on the hosted payment page, I want to come back to the site and see that the payment was cancelled, so that I can try again.
+9. As a learner whose payment is declined, I want to come back to the site and see that it failed, so that I can try another payment type.
+10. As a learner, I want never to be charged twice or enrolled twice for one cart because Paygate notified the site more than once, so that duplicate notices cause no harm.
+11. As a learner who paid but was not enrolled, I want support staff to be able to verify my payment against Paygate and settle my cart, so that my problem is solved quickly.
+12. As a site operator, I want to install `eox-paygate` next to `openedx-zeitlabs-payments` and have the processor registered automatically, so that I don't have to change zeitlabs or the platform.
+13. As a site operator, I want to configure Paygate per site in `PAYGATE_SETTINGS`, through the site configuration or Django settings, so that each site in a multi-tenant instance can use its own Paygate merchant or none.
+14. As a site operator, I want to set the Paygate API base URL myself, with no URL built into the code, so that I decide whether a site talks to Paygate's test or production environment.
+15. As a site operator, I want to configure the access token, merchant code, Basic auth user and password, and callback key, so that the processor can authenticate against Paygate and verify Paygate's server callbacks.
+16. As a site operator, I want to configure which payment types are offered, defaulting to VISA, MASTERCARD, AMEX, PAYPAL, MBWAY, REFMB and DUC, so that I only offer the types my merchant has enabled.
+17. As a site operator, I want the processor hidden at checkout on any site without a usable Paygate configuration, so that learners never see a processor that cannot work.
+18. As a site operator, I want a single server callback URL for Paygate to call, so that I can register it in my Paygate merchant set-up.
+19. As a site operator, I want server callbacks with a wrong or missing callback key rejected without effect, so that nobody can settle carts by calling the URL.
+20. As a site operator, I want every server callback verified against Paygate's API before a cart is settled, so that a forged or leaked callback cannot mark a cart as paid.
+21. As a site operator, I want the amount and currency Paygate reports compared against the cart, so that an underpaid or wrong-currency payment is never settled as paid.
+22. As a site operator, I want access tokens, passwords and the callback key kept out of logs and out of the transaction data the plugin stores, so that credentials do not leak through the database or log shipping.
+23. As a site operator, I want a management command that finds payments completed in Paygate within a time window and settles carts that were not settled, so that I can recover after an outage in which server callbacks were lost.
+24. As a site operator, I want that management command to accept a single payment reference, so that I can recover one learner's payment.
+25. As a site operator, I want the management command to skip carts that are already settled and to report what it did, so that running it twice is safe.
+26. As support staff, I want a "Check payment in Paygate" action on the cart admin of a site with Paygate configured, so that I can settle a paid cart from the admin.
+27. As support staff, I want a "Mark test payment as paid" action on the cart admin of a site with Paygate configured, so that I can simulate a completed deferred payment in Paygate's test environment and exercise the server callback.
+28. As support staff, I want a clear admin message for each selected cart: settled, still pending, not a Paygate cart, not found in Paygate, or Paygate error, so that I know what happened to each one.
+29. As support staff on a site without Paygate configuration, I want the cart admin to look exactly like the standard zeitlabs one, so that Paygate actions don't appear where they cannot work.
+30. As a developer, I want the processor to rely only on the zeitlabs processor contract `v1` and its public settlement logic, so that it keeps working as zeitlabs evolves.
+31. As a developer, I want every behaviour written test-first (TDD), so that each piece of code exists because a failing test required it.
+32. As a developer, I want 100% test coverage enforced in CI from the first commit, so that no untested code is merged.
+33. As a developer, I want GitHub Actions to run the tests on Python 3.11 with Django 4.2 and Python 3.12 with Django 5.2, so that the plugin keeps working on the Open edX releases in use.
+34. As a developer, I want a short README that links to separate documents for installation, configuration (every setting and the server callback URL), admin actions, management commands and the manual end-to-end test procedure against Paygate's test environment, all in English, so that operators and testers can find what they need without reading the code.
 
 ## Implementation Decisions
 
@@ -60,7 +56,7 @@ The Paygate API reference is its published swagger (`/paygateWS/swagger/v3/swagg
 - `openedx-zeitlabs-payments` and `openedx-platform` are not modified. Everything lives in `eox-paygate`.
 
 **Configuration**
-- All configuration lives in `PAYGATE_SETTINGS`. It is read through the zeitlabs settings service, which reads the current site's configuration first and Django settings otherwise. Configuration from other sites is never consulted.
+- All configuration lives in `PAYGATE_SETTINGS`, read with `configuration_helpers.get_value('PAYGATE_SETTINGS', getattr(settings, 'PAYGATE_SETTINGS', {}))`.
 - Keys: API base URL, access token, merchant code, Basic auth user, Basic auth password, callback key, payment types (with the default list above), and request timeouts with sensible defaults.
 - The code contains no Paygate URL, neither test nor production.
 - The processor exposes a single "is enabled" check: true when the required keys are present for the current site. It drives both the checkout visibility (`is_hidden_for`) and the admin actions' visibility.
@@ -156,7 +152,7 @@ The Paygate API reference is its published swagger (`/paygateWS/swagger/v3/swagg
 - **CI:**
   - A GitHub Actions workflow (none exists today) runs tox on Python 3.11 + Django 4.2 and Python 3.12 + Django 5.2, plus quality checks.
   - Coverage must be 100%, with `fail_under = 100`, from the first commit.
-- **Manual end-to-end:** the developer runs it in a staging environment against Paygate's test environment, following the procedure in the README. It covers each payment type, the return HTTP method, and the server callback via "Mark test payment as paid". It is not automated.
+- **Manual end-to-end:** the developer runs it in a staging environment against Paygate's test environment, following the manual end-to-end test procedure document. It covers each payment type, the return HTTP method, and the server callback via "Mark test payment as paid". It is not automated.
 
 ## Out of Scope
 
