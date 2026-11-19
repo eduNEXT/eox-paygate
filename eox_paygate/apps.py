@@ -1,6 +1,4 @@
-"""
-eox-paygate Django application initialization.
-"""
+"""eox-paygate Django application initialization."""
 from django.apps import AppConfig
 
 

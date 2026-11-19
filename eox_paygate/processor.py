@@ -1,6 +1,4 @@
-"""
-Paygate processor for openedx-zeitlabs-payments.
-"""
+"""Paygate processor for openedx-zeitlabs-payments."""
 from typing import Any, Optional
 
 from django.http import HttpRequest

@@ -1,6 +1,4 @@
-"""
-Return and status views of the Paygate processor, mounted by zeitlabs under the processor's slug.
-"""
+"""Return and status views of the Paygate processor, mounted by zeitlabs under the processor's slug."""
 from typing import Optional
 
 from django.views import View
