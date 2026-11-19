@@ -37,6 +37,7 @@ htmlcov/
 /venv-*/
 /.venv/
 /.venv-*/
+/*-venv/
 
 # The Silver Searcher
 .agignore
@@ -63,3 +64,6 @@ docs/eox_paygate.*.rst
 # Private requirements
 requirements/private.in
 requirements/private.txt
+
+# Checkout of openedx-zeitlabs-payments used by the tests (see the Makefile)
+/.zeitlabs/

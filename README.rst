@@ -18,14 +18,12 @@ The package registers itself through two entry points, without changes in zeitla
 - ``zeitlabs_payments.v1``: ``paygate = eox_paygate.processor:PaygateProcessor``.
 - ``lms.djangoapp``: installs the Django app, so the LMS finds its templates.
 
-The processor is hidden in the checkout while ``PAYGATE_SETTINGS`` is not configured.
+The processor is hidden in the checkout while ``EOX_PAYGATE_SETTINGS`` does not hold every required key.
 
 Configuration
 *************
 
-``PAYGATE_SETTINGS`` is read from the site configuration first and from the Django settings otherwise::
-
-    PAYGATE_SETTINGS = {}
+See `docs/configuration.rst <docs/configuration.rst>`_.
 
 URLs
 ****
@@ -35,10 +33,8 @@ zeitlabs mounts the views of the processor by its slug:
 - ``payment/v1/processor/paygate/return/``
 - ``payment/v1/processor/paygate/status/``
 
-Pending
-*******
+Not implemented yet
+*******************
 
-- ``PaygateProcessor.get_transaction_parameters`` and ``PaygateProcessor.reconcile_payment``.
-- ``PaygateStatusView``: ``get_order_cart_reference``, ``get_order_status``, ``get_payment_status``,
-  ``verify_success_response`` and ``get_transaction_details``.
-- ``GATEWAY_ORDER_ID_PARAM`` and the template ``eox_paygate/payment.html``.
+- The hand-off of the learner to Paygate's hosted payment page.
+- The settlement of the payment when the learner returns, and through Paygate's server callback.

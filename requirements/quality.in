@@ -1,0 +1,8 @@
+# Requirements for code quality checks.
+-c constraints.txt
+
+edx-lint                 # pylint with the Open edX plugins and configuration
+isort                    # checks the order of imports
+pycodestyle              # PEP 8 compliance validation
+pydocstyle               # PEP 257 compliance validation
+setuptools               # imported by setup.py, which pylint checks; Python 3.12 venvs do not include it
