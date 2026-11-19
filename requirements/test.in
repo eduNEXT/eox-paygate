@@ -5,7 +5,6 @@
 
 pytest-cov               # pytest extension for code coverage statistics
 pytest-django            # pytest extension for better Django support
-responses                # simulates the HTTP calls to Paygate
 
 # Runtime dependencies of openedx-zeitlabs-payments that it does not declare, and edx-opaque-keys for its
 # edx-platform mocks. openedx-zeitlabs-payments itself is installed from its main branch (see the Makefile).

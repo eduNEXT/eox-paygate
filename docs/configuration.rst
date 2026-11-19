@@ -2,7 +2,8 @@ Configuration
 #############
 
 All the configuration of the processor lives in the ``EOX_PAYGATE_SETTINGS`` dict. zeitlabs reads it with
-``configuration_helpers.get_value('EOX_PAYGATE_SETTINGS', getattr(settings, 'EOX_PAYGATE_SETTINGS', None))``:
+``configuration_helpers.get_value``, from the configuration of the current site or, when the site does not set it,
+from the Django settings:
 
 - Set it in the Django settings to configure Paygate for the whole installation.
 - Set it in a site's configuration to configure Paygate for that site.

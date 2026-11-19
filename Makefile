@@ -1,4 +1,4 @@
-.PHONY: help zeitlabs requirements test-python quality test
+.PHONY: help zeitlabs install-zeitlabs requirements test-python quality test
 
 .DEFAULT_GOAL := help
 
@@ -23,9 +23,11 @@ zeitlabs: ## check out openedx-zeitlabs-payments main into .zeitlabs
 		git clone --depth 1 --branch $(ZEITLABS_BRANCH) $(ZEITLABS_REPO) $(ZEITLABS_DIR); \
 	fi
 
-requirements: zeitlabs ## install the test and quality requirements in the current virtualenv
-	pip install -r requirements/test.in -r requirements/quality.in
+install-zeitlabs: zeitlabs ## install openedx-zeitlabs-payments main in the current virtualenv
 	pip install $(ZEITLABS_DIR)
+
+requirements: install-zeitlabs ## install the test and quality requirements in the current virtualenv, as the CI does
+	pip install -c requirements/constraints-verawood.in -r requirements/test.in -r requirements/quality.in
 	pip install -e .
 
 test-python: ## run the Python tests in the current virtualenv
