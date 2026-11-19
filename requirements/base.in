@@ -2,3 +2,4 @@
 -c constraints.txt
 
 Django             # Web application framework
+requests           # calls the Paygate API

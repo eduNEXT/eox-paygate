@@ -1,4 +1,4 @@
-.PHONY: help zeitlabs install-zeitlabs requirements test-python quality test
+.PHONY: help zeitlabs install-zeitlabs mocks-migrations requirements test-python quality test
 
 .DEFAULT_GOAL := help
 
@@ -30,7 +30,11 @@ requirements: install-zeitlabs ## install the test and quality requirements in t
 	pip install -c requirements/constraints-verawood.in -r requirements/test.in -r requirements/quality.in
 	pip install -e .
 
-test-python: ## run the Python tests in the current virtualenv
+mocks-migrations: ## create the migrations of zeitlabs' edx-platform mocks, which the tests' database needs
+	rm -rf $(ZEITLABS_MOCKS)/fake_models/migrations
+	$(PYTHON_ENV) django-admin makemigrations fake_models
+
+test-python: mocks-migrations ## run the Python tests in the current virtualenv
 	$(PYTHON_ENV) pytest
 
 quality: ## check the code style in the current virtualenv
