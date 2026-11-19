@@ -17,7 +17,7 @@ The Paygate API reference is its published swagger (`/paygateWS/swagger/v3/swagg
 1. As a learner, I want to see a "Pay with Paygate" option at checkout, so that I can pay with the payment types my site offers through Paygate.
 2. As a learner, I want to be sent to Paygate's hosted payment page with my cart's amount and description already set, so that I don't have to type payment details twice.
 3. As a learner, I want the hosted payment page in my language when Paygate supports it, so that I understand what I am paying for.
-4. As a learner, I want the hosted payment page to offer exactly the payment types configured in `PAYGATE_SETTINGS` for my site (by default VISA, MASTERCARD, AMEX, PAYPAL, MBWAY, REFMB and DUC), because the processor sends that list as `PAYMENT_TYPES` in the `CheckOut` request.
+4. As a learner, I want the hosted payment page to offer exactly the payment types configured in `EOX_PAYGATE_SETTINGS` for my site (by default VISA, MASTERCARD, AMEX, PAYPAL, MBWAY, REFMB and DUC), because the processor sends that list as `PAYMENT_TYPES` in the `CheckOut` request.
 5. As a learner, after paying on the hosted payment page, I want to come back to the site and see that my payment succeeded, so that I know I am enrolled.
 6. As a learner who chose a deferred payment type, I want to see that my payment is pending instead of an error, so that I know I still have to complete it.
 7. As a learner who pays a Multibanco reference or DUC days later, I want to be enrolled without doing anything else on the site, so that paying is all I need to do.
@@ -26,7 +26,7 @@ The Paygate API reference is its published swagger (`/paygateWS/swagger/v3/swagg
 10. As a learner, I want never to be charged twice or enrolled twice for one cart because Paygate notified the site more than once, so that duplicate notices cause no harm.
 11. As a learner who paid but was not enrolled, I want support staff to be able to verify my payment against Paygate and settle my cart, so that my problem is solved quickly.
 12. As a site operator, I want to install `eox-paygate` next to `openedx-zeitlabs-payments` and have the processor registered automatically, so that I don't have to change zeitlabs or the platform.
-13. As a site operator, I want to configure Paygate per site in `PAYGATE_SETTINGS`, through the site configuration or Django settings, so that each site in a multi-tenant instance can use its own Paygate merchant or none.
+13. As a site operator, I want to configure Paygate per site in `EOX_PAYGATE_SETTINGS`, through the site configuration or Django settings, so that each site in a multi-tenant instance can use its own Paygate merchant or none.
 14. As a site operator, I want to set the Paygate API base URL myself, with no URL built into the code, so that I decide whether a site talks to Paygate's test or production environment.
 15. As a site operator, I want to configure the access token, merchant code, Basic auth user and password, and callback key, so that the processor can authenticate against Paygate and verify Paygate's server callbacks.
 16. As a site operator, I want to configure which payment types are offered, defaulting to VISA, MASTERCARD, AMEX, PAYPAL, MBWAY, REFMB and DUC, so that I only offer the types my merchant has enabled.
@@ -56,7 +56,7 @@ The Paygate API reference is its published swagger (`/paygateWS/swagger/v3/swagg
 - `openedx-zeitlabs-payments` and `openedx-platform` are not modified. Everything lives in `eox-paygate`.
 
 **Configuration**
-- All configuration lives in `PAYGATE_SETTINGS`, read with `configuration_helpers.get_value('PAYGATE_SETTINGS', getattr(settings, 'PAYGATE_SETTINGS', {}))`.
+- All configuration lives in `EOX_PAYGATE_SETTINGS`, read with `configuration_helpers.get_value('EOX_PAYGATE_SETTINGS', getattr(settings, 'EOX_PAYGATE_SETTINGS', {}))`.
 - Keys: API base URL, access token, merchant code, Basic auth user, Basic auth password, callback key, payment types (with the default list above), and request timeouts with sensible defaults.
 - The code contains no Paygate URL, neither test nor production.
 - The processor exposes a single "is enabled" check: true when the required keys are present for the current site. It drives both the checkout visibility (`is_hidden_for`) and the admin actions' visibility.
