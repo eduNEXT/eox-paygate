@@ -33,6 +33,21 @@ Required keys
    * - ``CALLBACK_KEY``
      - Callback key configured for the merchant in Paygate, which Paygate sends in every server callback.
 
+Optional keys
+*************
+
+.. list-table::
+   :header-rows: 1
+
+   * - Key
+     - Description
+   * - ``PAYMENT_TYPES``
+     - Payment types offered on Paygate's hosted payment page. Defaults to
+       ``['VISA', 'MASTERCARD', 'AMEX', 'PAYPAL', 'MBWAY', 'REFMB', 'DUC']``. Offer only the types the merchant has
+       enabled in Paygate.
+   * - ``TIMEOUT``
+     - Seconds to wait for each answer of the Paygate API. Defaults to ``20``.
+
 Example::
 
     EOX_PAYGATE_SETTINGS = {

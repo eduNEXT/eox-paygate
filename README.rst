@@ -16,7 +16,7 @@ next to it::
 The package registers itself through two entry points, without changes in zeitlabs:
 
 - ``zeitlabs_payments.v1``: ``paygate = eox_paygate.processor:PaygateProcessor``.
-- ``lms.djangoapp``: installs the Django app, so the LMS finds its templates.
+- ``lms.djangoapp``: installs the Django app in the LMS.
 
 The processor is hidden in the checkout while ``EOX_PAYGATE_SETTINGS`` does not hold every required key.
 
@@ -28,7 +28,8 @@ See `docs/configuration.rst <docs/configuration.rst>`_.
 URLs
 ****
 
-zeitlabs mounts the views of the processor by its slug:
+zeitlabs mounts the views of the processor by its slug. Paygate sends the learner back to the return view after a
+success, a cancel or a failure alike:
 
 - ``payment/v1/processor/paygate/return/``
 - ``payment/v1/processor/paygate/status/``
@@ -36,5 +37,4 @@ zeitlabs mounts the views of the processor by its slug:
 Not implemented yet
 *******************
 
-- The hand-off of the learner to Paygate's hosted payment page.
 - The settlement of the payment when the learner returns, and through Paygate's server callback.
