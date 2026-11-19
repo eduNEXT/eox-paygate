@@ -98,7 +98,7 @@ def test_the_learner_is_redirected_to_the_hosted_payment_page(cart):
 
 @pytest.mark.usefixtures('checkout')
 def test_the_payment_reference_is_recorded_as_the_gateway_order_id(cart):
-    """Handing a cart off makes zeitlabs record the payment reference as the cart's gateway order id.
+    """Handing a cart off records the payment reference as the cart's gateway order id.
 
     Expected result:
     - The cart's gateway order id is its payment reference.
