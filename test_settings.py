@@ -28,6 +28,8 @@ INSTALLED_APPS = (
     'eox_paygate',
 )
 
+ROOT_URLCONF = 'tests.urls'
+
 SECRET_KEY = 'insecure-secret-key'
 
 MIDDLEWARE = (
