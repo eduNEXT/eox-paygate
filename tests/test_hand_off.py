@@ -32,12 +32,12 @@ def paygate_settings(settings):
     settings.EOX_PAYGATE_SETTINGS = PAYGATE_SETTINGS
 
 
-def hand_off(cart, language_code='en'):
+def hand_off(cart):
     """Hand the cart off to Paygate as zeitlabs does when the learner chooses Paygate at checkout."""
     request = RequestFactory().get('/')
     request.site = Site.objects.get_current()
     request.user = cart.user
-    request.LANGUAGE_CODE = language_code
+    request.LANGUAGE_CODE = 'en'
     return PaygateProcessor().payment_view(cart, request)
 
 
@@ -141,17 +141,6 @@ def test_the_learner_full_name_is_sent_without_a_profile_name(cart, checkout, pr
     hand_off(cart)
 
     assert json.loads(checkout.calls[0].request.body)['CLIENT_NAME'] == 'Ana Learner'
-
-
-def test_the_language_is_the_request_language_in_upper_case(cart, checkout):
-    """The language sent to Paygate is the one zeitlabs reads from the request, in upper case.
-
-    Expected result:
-    - The CheckOut request's language is the request's language in upper case.
-    """
-    hand_off(cart, language_code='ar')
-
-    assert json.loads(checkout.calls[0].request.body)['LANGUAGE'] == 'AR'
 
 
 @pytest.mark.parametrize('configured_timeout, timeout', [

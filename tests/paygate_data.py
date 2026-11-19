@@ -10,7 +10,7 @@ PAYGATE_SETTINGS = {
     'BASIC_AUTH_PASSWORD': 'basic-password',
     'CALLBACK_KEY': 'callback-key',
 }
-CREDENTIALS = ['access-token', 'basic-password', 'callback-key']
+CREDENTIALS = [PAYGATE_SETTINGS[key] for key in ('ACCESS_TOKEN', 'BASIC_AUTH_PASSWORD', 'CALLBACK_KEY')]
 COURSE_ID = 'course-v1:org+course+run'
 PAYMENT_PAGE_URL = 'https://paygate.example.com/widget'
 SESSION_TOKEN = 'session-token'
